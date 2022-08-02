@@ -40,7 +40,7 @@ def main():
             service = v1.read_namespaced_service(name = SERVICE_NAME, namespace = NAMESPACE)
             external_name = service.spec.external_name
 
-        service_metadata = client.V1ObjectMeta(name=SERVICE_NAME)
+        service_metadata = client.V1ObjectMeta(name=SERVICE_NAME, annotations="managed-by=redis-master-switcher")
         service_spec = client.V1ServiceSpec(type="ExternalName", external_name=redis_master_name)
         service_body = client.V1Service(
             metadata=service_metadata,
